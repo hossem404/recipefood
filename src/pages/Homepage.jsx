@@ -2,11 +2,13 @@ import axios from "axios";
 import React, { useState } from "react";
 import SearchBar from "../components/searchBar";
 import Recipelist from "../components/recipelist";
+import "./homepage.css"; 
+import Slider from "../components/Slider";
 
 const Homepage = () => {
-  const [recipes, setrecipes] = useState([]);
+  const [recipes, setRecipes] = useState([]);
 
-  const fetchrecipes = (query) => {
+  const fetchRecipes = (query) => {
     axios
       .get("https://api.spoonacular.com/recipes/complexSearch", {
         params: {
@@ -16,14 +18,18 @@ const Homepage = () => {
       })
       .then((res) => {
         console.log(res.data.results);
-        setrecipes(res.data.results);
+        setRecipes(res.data.results);
       });
   };
+
   return (
-    <>
-      <SearchBar fetchrecipes={fetchrecipes} />
+    <div className="container">
+      <h1 className="header">Find Your Recipes</h1>
+      <SearchBar fetchrecipes={fetchRecipes} />
       <Recipelist recipes={recipes} />
-    </>
+      <Slider/>
+    
+    </div>
   );
 };
 

@@ -1,0 +1,13 @@
+  .container {
+    margin-top: 20px;
+  }
+  
+  .recipe-image {
+    width: 100%;
+    height: auto;
+  }
+  
+  .recipe-title {
+    font-size: 1.5em;
+    font-weight: bold;
+  }

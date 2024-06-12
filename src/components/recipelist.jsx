@@ -1,17 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "./recipelist.css"; // Import the CSS file
 
 const Recipelist = ({ recipes }) => {
   return (
-    <>
+    <div className="recipe-container">
       {recipes.map((recipe, index) => (
-        <div key={index}>
-          <h1>{recipe.id}</h1> 
-          <Link to={`/recipe/${recipe.id}`}>{recipe.title}</Link>
-          <img src={recipe.image} alt="title" />
+        <div className="recipe-item" key={index}>
+          <h1 className="recipe-title">{recipe.id}</h1> 
+          <Link to={`/recipe/${recipe.id}`} className="recipe-title">{recipe.title}</Link>
+          <img className="recipe-image" src={recipe.image} alt={recipe.title} />
         </div>
       ))}
-    </>
+    </div>
   );
 };
 

@@ -1,14 +1,21 @@
 import React, { useState } from "react";
-
+import "./searchbar.css";
 const SearchBar = ({ fetchrecipes }) => {
   const [query, setquery] = useState("");
   const handleSearch = () => {
     fetchrecipes(query);
   };
   return (
-    <div>
-      <input type="text" onChange={(e) => setquery(e.target.value)} />
-      <button onClick={handleSearch}>Search</button>
+    <div className="search-container">
+      <input
+        type="text"
+        className="search-input"
+        value={query}
+        onChange={(e) => setquery(e.target.value)}
+      />
+      <button className="search-button" onClick={handleSearch}>
+        Search
+      </button>
     </div>
   );
 };

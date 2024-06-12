@@ -1,10 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+import "./recipepage.css";
 
 const Recipepage = () => {
   const { id } = useParams();
-  const [recipe, setrecipe] = useState({});
+  const [recipe, setRecipe] = useState({});
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -15,20 +19,28 @@ const Recipepage = () => {
       })
       .then((res) => {
         console.log(res.data);
-        setrecipe(res.data);
+        setRecipe(res.data);
       });
-  }, []);
+  }, [id]);
 
   return (
-    <div>
-      {recipe && (
-        <>
-          <p>
-            image: <img src={recipe.image} />
-          </p>
-          <p>title : {recipe.title}</p>
-        </>
+    <div className="container mt-4">
+      
+      {recipe && recipe.title && (
+        <Card className="mt-4">
+          <Card.Img variant="top" src={recipe.image} alt={recipe.title} />
+          <Card.Body>
+            <Card.Title>{recipe.title}</Card.Title>
+            <Card.Text>
+              <div dangerouslySetInnerHTML={{ __html: recipe.summary }} />
+              <p>Ready in: {recipe.readyInMinutes} minutes</p>
+              <p>Servings: {recipe.servings}</p>
+            </Card.Text>
+            <Button variant="primary" href={recipe.sourceUrl} target="_blank">View Full Recipe</Button>
+          </Card.Body>
+        </Card>
       )}
+      <Button variant="secondary" onClick={() => navigate('/')}>Home</Button>
     </div>
   );
 };
